@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEXUS AI - Deep Space</title>
+    <style>
+        /* 1. Deep Space Background (Internet ki zaroorat nahi) */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; 
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            overflow: hidden; font-family: 'Segoe UI', sans-serif;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* 2. Moving Stars Effect */
+        .stars-container {
+            position: absolute; width: 100%; height: 100%;
+            background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/123163/stars.png') repeat;
+            z-index: 0; animation: move-stars 100s linear infinite;
+        }
+        @keyframes move-stars {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* 3. High-End Glassmorphism Box */
+        .glass-panel {
+            position: relative; z-index: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 40px; padding: 60px; width: 550px; text-align: center;
+            box-shadow: 0 0 80px rgba(0, 255, 204, 0.2);
+        }
+
+        h1 { 
+            font-size: 3.5rem; color: #00ffcc; 
+            text-shadow: 0 0 20px #00ffcc; margin: 0; letter-spacing: 4px;
+        }
+
+        /* 4. Glowing Astronaut Circle */
+        .astro-circle {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: linear-gradient(45deg, #00ffcc, #0077ff);
+            margin: 0 auto 30px; box-shadow: 0 0 30px #00ffcc;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px #00ffcc; }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px #00ffcc; }
+            100% { transform: scale(1); box-shadow: 0 0 20px #00ffcc; }
+        }
+
+        input, textarea {
+            width: 100%; background: rgba(0,0,0,0.4); color: white; border: 1px solid #333;
+            margin: 15px 0; border-radius: 12px; padding: 15px; font-size: 1rem; outline: none;
+        }
+        input:focus, textarea:focus { border-color: #00ffcc; }
+
+        button {
+            background: #00ffcc; color: #000; border: none; padding: 18px 45px;
+            font-size: 1.2rem; font-weight: bold; border-radius: 50px; cursor: pointer;
+            transition: 0.4s; margin-top: 20px; width: 100%;
+        }
+        button:hover { background: #fff; transform: scale(1.02); box-shadow: 0 0 30px #fff; }
+
+        #result { margin-top: 25px; color: #00ffcc; font-weight: bold; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="glass-panel">
+        <div class="astro-circle"></div>
+        <h1>NEXUS-AI</h1>
+        <p style="color: #aaa;">Deep Space Document Intelligence</p>
+        
+        <form id="upload-form">
+            <input type="file" id="resume" accept=".pdf" required>
+            <textarea id="jd" rows="4" placeholder="Enter Mission Requirements..."></textarea>
+            <button type="submit">LAUNCH ANALYSIS</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('upload-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = "Analyzing Neural Link...";
+            
+            const formData = new FormData();
+            formData.append('resume', document.getElementById('resume').files[0]);
+            formData.append('jd', document.getElementById('jd').value);
+
+            const response = await fetch('/match', { method: 'POST', body: formData });
+            const data = await response.json();
+            resultDiv.innerText = "Match Integrity: " + data.score + "%";
+        };
+    </script>
+</body>
+</html>
