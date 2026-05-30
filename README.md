@@ -11,7 +11,6 @@ An enterprise-ready, lightweight Flask web application engineered to streamline 
 * **Mathematical Matching Matrix:** Computes the precise angular distance between vector representations using `Cosine Similarity` to yield an objective match percentage ($0\%$ to $100\%$).
 * **Intuitive Minimalist UI:** A clean, responsive, and user-friendly web interface tailored for quick document uploading and real-time processing.
 
----
 
 ## 🛠️ System Architecture & Workflow
 
