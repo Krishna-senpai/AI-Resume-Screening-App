@@ -4,7 +4,7 @@
     <title>NEXUS AI - Deep Space</title>
     <style>
         /* 1. Deep Space Background (Internet ki zaroorat nahi) */
-        body, html { 
+        body, html {  
             margin: 0; padding: 0; height: 100%; 
             background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             overflow: hidden; font-family: 'Segoe UI', sans-serif;
